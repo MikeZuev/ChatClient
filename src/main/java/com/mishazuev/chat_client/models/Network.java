@@ -38,6 +38,7 @@ public class Network {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Соединение не установлено");
+            System.out.println("--------------------------");
         }
 
     }
