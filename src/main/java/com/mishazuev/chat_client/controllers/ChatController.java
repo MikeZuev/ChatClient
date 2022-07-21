@@ -4,13 +4,11 @@ import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import com.mishazuev.chat_client.StartClient;
 import com.mishazuev.chat_client.models.Network;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class ChatController {
 
@@ -24,6 +22,9 @@ public class ChatController {
     private TextArea chatHistory;
 
     @FXML
+    private Label usernameTitle;
+
+    @FXML
     private TextField inputField;
 
     @FXML
@@ -33,6 +34,8 @@ public class ChatController {
     private ListView<String> usersList;
 
     private Network network;
+
+    private StartClient startClient;
 
     @FXML
     void initialize() {
@@ -72,4 +75,11 @@ public class ChatController {
     }
 
 
+    public void setStartClient(StartClient startClient) {
+        this.startClient = startClient;
+    }
+
+    public void setUsernameTitle(String usernameTitleStr) {
+        this.usernameTitle.setText(usernameTitleStr);
+    }
 }
