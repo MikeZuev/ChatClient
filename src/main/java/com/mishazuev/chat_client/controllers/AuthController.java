@@ -32,6 +32,10 @@ public class AuthController {
 
     private StartClient startClient;
 
+    private ChatController chatController;
+
+    private String username;
+
     @FXML
     void initialize() {
 
@@ -46,12 +50,14 @@ public class AuthController {
         if(login.length() == 0 || password.length() == 0) {
             System.out.println("Ошибка ввода при аутинфикации");
             System.out.println("Поля не должны быть пустые");
+            startClient.showErrorAlert("Ошибка ввода при аутинфикации", "Поля не должны быть пустые");
             return;
         }
 
         if(login.length() > 32 || password.length() > 32) {
             System.out.println("Ошибка ввода при аутинфикации");
             System.out.println("Длина логина или пороля должны быть не более 32 символов");
+            startClient.showErrorAlert("Ошибка ввода при аутинфикации", "Длина логина или пороля должны быть не более 32 символов");
             return;
         }
 
@@ -61,9 +67,12 @@ public class AuthController {
 
         if(authErrorMessage == null) {
             // call the second chat view window
+
             startClient.openChatDialog();
 
+
         } else {
+            startClient.showErrorAlert("Ошибка аутентификации", authErrorMessage);
             System.out.println(authErrorMessage);
         }
 

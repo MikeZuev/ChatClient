@@ -6,6 +6,7 @@ import com.mishazuev.chat_client.models.Network;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -22,6 +23,7 @@ public class StartClient extends Application {
 
         primaryStage = stage;
         network = new Network();
+        network.setStartClient(this);
         network.connect();
 
         openAuthDialog();
@@ -69,10 +71,7 @@ public class StartClient extends Application {
 
 
 
-    }
 
-    public static void main(String[] args) {
-        launch();
     }
 
     public void openChatDialog() {
@@ -80,10 +79,35 @@ public class StartClient extends Application {
         primaryStage.show();
         primaryStage.setTitle(network.getUsername());
 
-        network.waitMessage(chatController);
         chatController.setUsernameTitle(network.getUsername());
+        chatController.appendChatHistory(network.getChatHistory());
+
+    //    chatController.getUsersList().getItems().add(network.getUsername());
+        network.waitMessage(chatController);
 
 
 
+    }
+
+    public void showErrorAlert(String title, String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(errorMessage);
+        alert.show();
+    }
+
+    public void showInfoAlert(String title, String infoMessage) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(infoMessage);
+        alert.show();
+    }
+
+
+
+
+    public static void main(String[] args) {
+
+        launch();
     }
 }
